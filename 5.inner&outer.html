@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="h1">Hello I am CFI</h1>
+    <h2 id="h2">I am samid</h2>
+</body>
+<script>
+// 5. 
+
+// innerHTML => to get and set
+// outerHTML => to get and set
+
+let h1 = document.getElementById("h1");
+console.log(h1.innerHTML); // to get
+h1.innerHTML = "suhail"; // to set
+console.log(h1.innerHTML);
+
+let h2 = document.getElementById("h2");
+console.log(h2);
+
+console.log(h2.outerHTML);
+
+h2.outerHTML = "<span>Hello I am H2</span>"
+console.log(h2);
+
+</script>
+</html>
