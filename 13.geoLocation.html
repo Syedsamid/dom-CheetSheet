@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="getLocation()">Get Location</button>
+    <p id="Location"></p>
+</body>
+
+<script>
+    
+    function getLocation(){
+        let geo = navigator.geolocation;
+        console.log("hello");
+        let locationId = document.getElementById("Location");
+
+        if (geo) {
+            geo.getCurrentPosition(
+                (position) =>{
+                    let lat = position.coords.latitude;
+                    let long = position.coords.longitude;
+                    // locationId.innerHTML = `Bhai location hat lats: ${lat} and Long: ${long}`;
+                    locationId.innerHTML = `<a target="_blank" href='https://www.google.com/maps?q=${lat},${long}'>Google Maps Link</a>`
+                },
+                (error) =>{
+                    locationId.innerHTML = "Failed to fetch location. Please allow location access";
+                }
+            );
+        } else {
+            locationId.innerHTML = "You Blocked the permission or Geolocation is not supported"
+        }
+    }
+
+</script>
+</html>
