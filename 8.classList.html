@@ -6,15 +6,24 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="box1">Hello I am Box1</div>
-    <div class="box">Hello I am Box</div>
+    <div class="suhail">Hello I am Suhail</div>
+    <div class="samid">Hello I am Samid</div>
 </body>
 <script>
 
-let box = document.querySelector(".box")
-console.log(box.outerHTML);
 
-box.classList.add("box1")
+let suhailId = document.querySelector(".suhail");
+console.log(suhailId);
+console.log(suhailId.innerHTML);
+console.log(suhailId.outerHTML);
+
+// suhailId.classList.add("btn");
+// suhailId.classList.remove("btn")
+
+suhailId.classList.replace("suhail","roushan")
+
+
+// box.classList.add("box1")
 // box.classList.remove("box")
 // box.classList.replace("box","suhail")
 
