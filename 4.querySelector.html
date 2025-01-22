@@ -11,18 +11,20 @@
     <p class="box">Hello 2</p>
     <p class="box">Hello 3</p>
 
+    <p class="box1">Hello 4</p>
+
     <div class="class">samid</div>
 
 </body>
 
 <script>
-    let pbox = document.querySelector("p.box");
+    let pbox = document.querySelector("p.box1");
     console.log(pbox);
 
     let pboxloop = document.querySelectorAll("p.box");
 
-    for(let l = 0 ; l<=pboxloop.length-1;l++){
-        console.log(pboxloop[l]);
+    for(let i = 0 ; i<=pboxloop.length-1;i++){
+        console.log(pboxloop[i]);
     }
 </script>
 </html>
