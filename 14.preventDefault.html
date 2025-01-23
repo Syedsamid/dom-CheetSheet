@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <a target="_blank" id="atag" href="https://google.com">Google</a>
+
+</body>
+
+<script>
+  let atag = document.getElementById("atag");
+  atag.addEventListener("click",(event)=>{
+    console.log("clicked");
+    event.preventDefault()
+  })
+  
+</script>
+
+</html>
