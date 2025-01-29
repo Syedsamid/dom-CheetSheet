@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+</head>
+<body>
+  <div class="container">
+    <h1>To-Do List</h1>
+    <div class="form-group">
+      <input type="text" id="todo-input" placeholder="Add a new task" />
+      <button id="add-btn">Add</button>
+    </div>
+    <div class="todo-list" id="todo-list"></div>
+  </div>
+
+  <script>
+    // Selectors
+    const todoInput = document.getElementById('todo-input');cd 
+    const addBtn = document.getElementById('add-btn');
+    const todoList = document.getElementById('todo-list');
+
+    // Load todos from local storage
+    let todos = JSON.parse(localStorage.getItem('todos')) || [];
+
+    // Display todos
+    const displayTodos = () => {
+      todoList.innerHTML = '';
+      todos.forEach((todo, index) => {
+        const todoCard = document.createElement('div');
+        todoCard.className = 'todo-card';
+
+        const todoText = document.createElement('div');
+        todoText.className = 'todo-text';
+        todoText.textContent = todo.text;
+
+        const actions = document.createElement('div');
+        actions.className = 'actions';
+
+        const editBtn = document.createElement('button');
+        editBtn.textContent = 'Edit';
+        editBtn.onclick = () => editTodo(index);
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.onclick = () => deleteTodo(index);
+
+        actions.appendChild(editBtn);
+        actions.appendChild(deleteBtn);
+
+        todoCard.appendChild(todoText);
+        todoCard.appendChild(actions);
+
+        todoList.appendChild(todoCard);
+      });
+    };
+
+    // Add a new todo
+    const addTodo = () => {
+      const text = todoInput.value.trim();
+      if (text) {
+        todos.push({ text });
+        saveTodos();
+        displayTodos();
+        todoInput.value = '';
+      }
+    };
+
+    // Edit a todo
+    const editTodo = (index) => {
+      const newText = prompt('Edit your task:', todos[index].text);
+      if (newText !== null) {
+        todos[index].text = newText.trim();
+        saveTodos();
+        displayTodos();
+      }
+    };
+
+    // Delete a todo
+    const deleteTodo = (index) => {
+      todos.splice(index, 1);
+      saveTodos();
+      displayTodos();
+    };
+
+    // Save todos to local storage
+    const saveTodos = () => {
+      localStorage.setItem('todos', JSON.stringify(todos));
+    };
+
+    // Event listeners
+    addBtn.addEventListener('click', addTodo);
+    todoInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') addTodo();
+    });
+
+    // Initial render
+    displayTodos();
+  </script>
+</body>
+</html>
