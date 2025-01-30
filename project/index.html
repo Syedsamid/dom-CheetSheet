@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            border: 2px solid red;
+        }
+        .todoList{
+            border:2px solid black
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Todo Task App</h1>
+        <div class="form-group">
+            <input type="text" id="todoInput" placeholder="Add Task">
+            <button onclick="addTodo()" type="submit">Add Task</button>
+        </div>
+
+        <div id="todoList" class="todoList">
+        </div>
+    </div>
+</body>
+<script>
+    
+    let todos = JSON.parse(localStorage.getItem("todos")) || [];
+
+    function displayTodos() {
+        const todoList = document.getElementById("todoList");
+        todoList.innerHTML = "";
+        todos.forEach((x, index) => {
+            const todoItem = document.createElement("div");
+            todoItem.classList.add("todo-item");
+            todoItem.innerHTML = `
+            <span> Task: ${x}</span>
+            <div>
+                <button onclick="editTodo(${index})">Edit</button>
+                <button onclick="deleteTodo(${index})">Delete</button>
+                </div> 
+            `
+
+            todoList.appendChild(todoItem);
+            console.log(x,index);
+        })
+    }
+
+    // Add todo
+    function addTodo() {
+        const todoInput = document.getElementById("todoInput");
+        const task = todoInput.value.trim();
+        console.log(task);
+
+        if (!task) {
+            alert("Please enter a task");
+            return; // It will exit the function and stop the code execution
+        }
+        todos.push(task);
+        localStorage.setItem("todos", JSON.stringify(todos));
+        todoInput.value = "";
+        displayTodos(); // It will call the function again and fetch all added todos
+    }
+
+    // Edit todo
+    function editTodo(index) {
+        const updatingNewTask = prompt("Enter the new task", todos[index]);
+        if (!updatingNewTask) {
+            alert("Please enter a task");
+            return; //It sill exit the function and stop the code execution
+        }
+
+        if (updatingNewTask.length > 10) {
+            alert("Task is to long");
+            return;
+        }
+
+        todos[index] = updatingNewTask;
+        localStorage.setItem("todos", JSON.stringify(todos));
+        displayTodos();
+    }
+
+    // delete todo
+    function deleteTodo(index) {
+        todos.splice(index, 1);
+        localStorage.setItem("todos", JSON.stringify(todos));
+        displayTodos();
+    }
+
+    displayTodos();
+</script>
+
+</html>
